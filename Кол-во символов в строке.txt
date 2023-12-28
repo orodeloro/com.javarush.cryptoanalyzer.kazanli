@@ -1,0 +1,19 @@
+import java.util.HashMap;
+
+public class stady {
+    public static void main(String[] args) {
+        HashMap<Character,Integer> member = new HashMap<>();
+        String str = "Hellow people !";
+        for (int i = 0; i < str.length(); i++) {
+            Character ch = str.charAt(i);
+            if (member.containsKey(ch)) {
+                int oldValue = member.get(ch);
+                member.put(ch,oldValue+1);
+            } else {
+                member.put(ch,1);
+            }
+
+        }
+        System.out.println(member);
+    }
+}
