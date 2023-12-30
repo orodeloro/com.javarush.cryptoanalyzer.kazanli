@@ -1,8 +1,9 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CaesarCipher {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         System.out.println("Вы находитесь в приложении \"Код Цезаря\"!");
         System.out.println("Выберите режим работы :");

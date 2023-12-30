@@ -5,16 +5,10 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Encryption {
-//    private static final char[] LOW_RUSALPHABET = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з',
-//            'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
-//            'ъ', 'ы', 'ь', 'э', 'ю', 'я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
-//    private static final char[] UP_RUSALPHABET = {'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З',
-//            'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ',
-//            'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
 
     static void doEncrypt() throws IOException {
-        System.out.println("Введиде ссылку к файлу :");
 
+        System.out.println("Введиде ссылку к файлу :");
         Scanner console = new Scanner(System.in);
         Path path = Path.of(console.nextLine());
 
@@ -23,26 +17,28 @@ public class Encryption {
             System.out.println("Введиде ключ :");
             int key = Integer.parseInt(console.next());
             if (key < 0) {
-                key = (key % Alphabet.LOW_RUSALPHABET.length) + Alphabet.LOW_RUSALPHABET.length;
+                key = (key % Alphabet.RUSALPHABET.length) + Alphabet.RUSALPHABET.length;
             }
 
             BufferedReader buff = new BufferedReader(Files.newBufferedReader(path));
-            char[] inputText = new char[(int) Files.size(path)];
-            buff.read(inputText);
+            char[] inputChars = new char[(int)Files.size(path)];
+            int sizeCipherArrayChars = buff.read(inputChars);
 
-            char[] cipherText = new char[inputText.length];
-            for (int i = 0; i < cipherText.length; i++) {
-                for (int j = 0; j < Alphabet.LOW_RUSALPHABET.length; j++) {
-                    if (inputText[i] == Alphabet.LOW_RUSALPHABET[j]) {
-                        cipherText[i] = Alphabet.LOW_RUSALPHABET[(j + key) % Alphabet.LOW_RUSALPHABET.length];
-                    } else if (inputText[i] == Alphabet.UP_RUSALPHABET[j]) {
-                        cipherText[i] = Alphabet.UP_RUSALPHABET[(j + key) % Alphabet.LOW_RUSALPHABET.length];
-                    } else {
-                        System.out.println("Символ " + inputText[i] + " не содержится в данном алфавите.");
+            char[] cipherChars = new char[sizeCipherArrayChars];
+            for (int i = 0; i < cipherChars.length; i++) {
+                for (int j = 0; j < Alphabet.RUSALPHABET.length; j++) {
+                    if (inputChars[i] == Alphabet.RUSALPHABET[j]) {
+                        cipherChars[i] = Alphabet.RUSALPHABET[(j + key) % Alphabet.RUSALPHABET.length];
+                    } else if (inputChars[i] == '\n' || inputChars[i] == '\r') {
+                        cipherChars[i] = inputChars[i];
                     }
                 }
+                if (cipherChars[i] == '\0') {
+                    System.out.println("Символ " + inputChars[i] + " не содержится в данном алфавите.");
+                    System.out.println();
+                }
             }
-            outputConsole(cipherText);
+            outputConsole(cipherChars);
         } else {
             System.out.println("По введенной ссылке файл не найден!");
         }
