@@ -21,7 +21,7 @@ public class Encryption {
             }
 
             BufferedReader buff = new BufferedReader(Files.newBufferedReader(path));
-            char[] inputChars = new char[(int)Files.size(path)];
+            char[] inputChars = new char[(int) Files.size(path)];
             int sizeCipherArrayChars = buff.read(inputChars);
 
             char[] cipherChars = new char[sizeCipherArrayChars];
@@ -34,7 +34,9 @@ public class Encryption {
                     }
                 }
                 if (cipherChars[i] == '\0') {
+                    cipherChars[i] = inputChars[i];
                     System.out.println("Символ " + inputChars[i] + " не содержится в данном алфавите.");
+                    System.out.println("Символ " + inputChars[i] + " не был зашифрован.");
                     System.out.println();
                 }
             }
