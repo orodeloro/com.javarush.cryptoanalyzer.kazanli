@@ -16,11 +16,9 @@ public class CaesarCipher {
 
         if (n == 1) {
             Encryption.doEncrypt();
-        }
-        if (n == 2) {
+        } else if (n == 2) {
             Decryption.doDecrypt();
-        }
-        if (n == 3) {
+        } else if (n == 3) {
             BruteForse.doBruteForse();
         } else {
             System.out.println("Вы ввели не корректное число.");

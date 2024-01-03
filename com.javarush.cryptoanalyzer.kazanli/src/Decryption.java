@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Decryption {
     static void doDecrypt() throws IOException {
+
         System.out.println("Введиде ссылку к файлу :");
         Scanner console = new Scanner(System.in);
         Path path = Path.of(console.nextLine());
@@ -35,7 +36,7 @@ public class Decryption {
                 if (deCipherChars[i] == '\0') {
                     deCipherChars[i] = inputChars[i];
                     System.out.println("Символ " + inputChars[i] + " не содержится в данном алфавите.");
-                    System.out.println("Символ " + inputChars[i] + " не был дешифрован.");
+                    System.out.println("Символ " + inputChars[i] + " не был зашифрован.");
                     System.out.println();
                 }
             }
