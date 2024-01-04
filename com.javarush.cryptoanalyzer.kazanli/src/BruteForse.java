@@ -1,4 +1,4 @@
-import javax.imageio.IIOException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,9 +16,9 @@ public class BruteForse {
 
             BufferedReader buff = new BufferedReader(Files.newBufferedReader(path));
             char[] inputChars = new char[(int) Files.size(path)];
-            int size = buff.read(inputChars);
+            int realSizeInputChars = buff.read(inputChars);
 
-            char[] deCipherChars = new char[size];
+            char[] deCipherChars = new char[realSizeInputChars];
 
             for (int k = 0; k < Alphabet.RUSALPHABET.length; k++) {
 
@@ -49,7 +49,6 @@ public class BruteForse {
             System.out.println("По введенной ссылке файл не найден!");
         }
     }
-
     private static void outputConsole(char[] chars) {
         for (char ch : chars) {
             System.out.print(ch);

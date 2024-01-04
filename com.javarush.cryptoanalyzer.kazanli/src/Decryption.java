@@ -22,28 +22,34 @@ public class Decryption {
 
             BufferedReader buff = new BufferedReader(Files.newBufferedReader(path));
             char[] inputChars = new char[(int) Files.size(path)];
-            int sizeDecipherArrayChars = buff.read(inputChars);
+            int realSizeInputChars = buff.read(inputChars);
 
-            char[] deCipherChars = new char[sizeDecipherArrayChars];
-            for (int i = 0; i < deCipherChars.length; i++) {
-                for (int j = 0; j < Alphabet.RUSALPHABET.length; j++) {
-                    if (inputChars[i] == Alphabet.RUSALPHABET[j]) {
-                        deCipherChars[i] = Alphabet.RUSALPHABET[(j + key) % Alphabet.RUSALPHABET.length];
-                    } else if (inputChars[i] == '\n' || inputChars[i] == '\r') {
-                        deCipherChars[i] = inputChars[i];
-                    }
-                }
-                if (deCipherChars[i] == '\0') {
-                    deCipherChars[i] = inputChars[i];
-                    System.out.println("Символ " + inputChars[i] + " не содержится в данном алфавите.");
-                    System.out.println("Символ " + inputChars[i] + " не был зашифрован.");
-                    System.out.println();
-                }
-            }
+            char[] deCipherChars = getCipherChars(inputChars, realSizeInputChars, key);
+
             outputConsole(deCipherChars);
         } else {
             System.out.println("По введенной ссылке файл не найден!");
         }
+    }
+    private static char[] getCipherChars(char[] inputChars, int realSizeInputChars, int key) {
+        char[] cipherChars = new char[realSizeInputChars];
+
+        for (int i = 0; i < cipherChars.length; i++) {
+            for (int j = 0; j < Alphabet.RUSALPHABET.length; j++) {
+                if (inputChars[i] == Alphabet.RUSALPHABET[j]) {
+                    cipherChars[i] = Alphabet.RUSALPHABET[(j + key) % Alphabet.RUSALPHABET.length];
+                } else if (inputChars[i] == '\n' || inputChars[i] == '\r') {
+                    cipherChars[i] = inputChars[i];
+                }
+            }
+            if (cipherChars[i] == '\0') {
+                cipherChars[i] = inputChars[i];
+                System.out.println("Символ " + inputChars[i] + " не содержится в данном алфавите.");
+                System.out.println("Символ " + inputChars[i] + " не был зашифрован.");
+                System.out.println();
+            }
+        }
+        return cipherChars;
     }
 
     private static void outputConsole(char[] chars) {
