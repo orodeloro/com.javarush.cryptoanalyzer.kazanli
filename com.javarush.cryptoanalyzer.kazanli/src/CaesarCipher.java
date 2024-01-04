@@ -10,6 +10,7 @@ public class CaesarCipher {
         System.out.println("1. Шифруем.");
         System.out.println("2. Дешифруем.");
         System.out.println("3. Взламываем");
+        System.out.println("4. Интеллектуальный взлом.(Не рекомендуется для коротких текстов)");
 
         Scanner console = new Scanner(System.in);
         int n = Integer.parseInt(console.nextLine());
@@ -20,6 +21,8 @@ public class CaesarCipher {
             Decryption.doDecrypt();
         } else if (n == 3) {
             BruteForse.doBruteForse();
+        } else if (n == 4) {
+            IntellectualBruteForce.doIntellectualBruteForce();
         } else {
             System.out.println("Вы ввели не корректное число.");
         }
