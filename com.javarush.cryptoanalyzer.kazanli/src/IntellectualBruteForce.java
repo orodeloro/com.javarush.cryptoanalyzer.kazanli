@@ -28,7 +28,6 @@ public class IntellectualBruteForce {
             int key = getKey(realSizeInputChars, inputChars);
 
             System.out.println("Ключ шифра: " + key);
-            System.out.println();
 
             key = -key;
 
