@@ -30,6 +30,8 @@ public class BruteForse {
                 int key = -k;
 
                 buffWriter.write(Encryption.getCipherChars(inputChars, realSizeInputChars, key));
+                buffWriter.append('\r');
+                buffWriter.append('\r');
                 buffWriter.flush();
             }
             buffWriter.close();
